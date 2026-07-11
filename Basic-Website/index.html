@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A premium, glassmorphic, and highly responsive Todo List application with categorization, prioritization, progress tracking, and local storage support. Built with HTML, CSS, and Vanilla JavaScript.">
+    <title>MyToDo - Modern Glassmorphic Task Manager</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-bubble bg-bubble-1"></div>
+    <div class="bg-bubble bg-bubble-2"></div>
+    <div class="bg-bubble bg-bubble-3"></div>
+
+    <main class="app-container">
+        <div class="todo-card">
+            <header class="card-header">
+                <div class="header-info">
+                    <h1 class="logo">MyToDo</h1>
+                    <p class="current-date" id="current-date">Friday, July 10</p>
+                </div>
+                <div class="progress-container">
+                    <div class="progress-details">
+                        <span class="progress-label">Task Progress</span>
+                        <span class="progress-stats" id="progress-stats">0% (0/0)</span>
+                    </div>
+                    <div class="progress-bar-outer">
+                        <div class="progress-bar-inner" id="progress-bar"></div>
+                    </div>
+                </div>
+            </header>
+
+            <section class="controls-section">
+                <div class="search-box">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="control-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <input type="text" id="search-input" placeholder="Search tasks...">
+                </div>
+
+                <div class="filter-tabs">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="pending">Pending</button>
+                    <button class="filter-btn" data-filter="completed">Completed</button>
+                </div>
+            </section>
+
+            <section class="input-section">
+                <form id="todo-form">
+                    <div class="form-row-main">
+                        <input type="text" id="todo-input" placeholder="What needs to be done?" required autocomplete="off">
+                        <button type="submit" class="btn-submit" aria-label="Add task">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                        </button>
+                    </div>
+                    
+                    <div class="form-row-details">
+                        <div class="detail-field">
+                            <label for="todo-category">Category</label>
+                            <select id="todo-category">
+                                <option value="Personal">🏠 Personal</option>
+                                <option value="Work">💼 Work</option>
+                                <option value="Shopping">🛒 Shopping</option>
+                                <option value="Health">💪 Health</option>
+                                <option value="Learning">📚 Learning</option>
+                            </select>
+                        </div>
+
+                        <div class="detail-field">
+                            <label for="todo-priority">Priority</label>
+                            <select id="todo-priority">
+                                <option value="low">🟢 Low</option>
+                                <option value="medium" selected>🟡 Medium</option>
+                                <option value="high">🔴 High</option>
+                            </select>
+                        </div>
+
+                        <div class="detail-field">
+                            <label for="todo-date">Due Date</label>
+                            <input type="date" id="todo-date">
+                        </div>
+                    </div>
+                </form>
+            </section>
+
+            <section class="list-section">
+                <ul class="todo-list" id="todo-list">
+                </ul>
+
+                <div class="empty-state" id="empty-state">
+                    <div class="empty-icon-container">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <polyline points="10 9 9 9 8 9"></polyline>
+                        </svg>
+                    </div>
+                    <p class="empty-text">No tasks found. Add a task to get started!</p>
+                </div>
+            </section>
+
+            <footer class="card-footer">
+                <span class="footer-info" id="footer-counter">0 tasks pending</span>
+                <button class="btn-clear" id="clear-completed-btn">
+                    <span>Clear Completed</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="3 6 5 6 21 6"></polyline>
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                    </svg>
+                </button>
+            </footer>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
